@@ -7,7 +7,7 @@
               
             </blockquote><br/><br/><br/>
         </div>
-        <div class="offset-md-1 row col-md-10 jumbotron">
+        <div class="row col-md-12 jumbotron">
 
         <table class="table">
             <thead class="thead-dark">

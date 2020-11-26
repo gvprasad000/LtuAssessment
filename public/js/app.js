@@ -2020,6 +2020,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2242,6 +2245,9 @@ methods: {}
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -38377,15 +38383,17 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "list-group" }, [
-              _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "container bg-primary" }, [
                 _c("div", { staticClass: "panel panel-primary" }, [
                   _c("div", { staticClass: "panel-body" }, [
-                    _vm._v(
-                      "\r\n                                    Please choose a file to evaluate "
-                    ),
-                    _c("button", [
+                    _c("label", { staticStyle: { "font-size": "20px" } }, [
+                      _vm._v("Please choose a file to evaluate")
+                    ]),
+                    _vm._v(" "),
+                    _c("button", { staticClass: "float-right" }, [
                       _c("i", {
                         staticClass: "fas fa-file-download fa-2x float-right",
+                        staticStyle: { color: "#007bff", "margin-top": "5px" },
                         on: { click: _vm.downlodFile }
                       })
                     ])
@@ -38518,7 +38526,7 @@ var staticRenderFns = [
         _c("br")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "offset-md-1 row col-md-10 jumbotron" }, [
+      _c("div", { staticClass: "row col-md-12 jumbotron" }, [
         _c("table", { staticClass: "table" }, [
           _c("thead", { staticClass: "thead-dark" }, [
             _c("tr", [
@@ -39035,15 +39043,17 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "list-group" }, [
-              _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "container bg-primary" }, [
                 _c("div", { staticClass: "panel panel-primary" }, [
                   _c("div", { staticClass: "panel-body" }, [
-                    _vm._v(
-                      "\r\n                                    Please choose a file to evaluate "
-                    ),
-                    _c("button", [
+                    _c("label", { staticStyle: { "font-size": "20px" } }, [
+                      _vm._v("Please choose a file to evaluate")
+                    ]),
+                    _vm._v(" "),
+                    _c("button", { staticClass: "float-right" }, [
                       _c("i", {
                         staticClass: "fas fa-file-download fa-2x float-right",
+                        staticStyle: { color: "#007bff", "margin-top": "5px" },
                         on: { click: _vm.downlodFile }
                       })
                     ])
@@ -39218,7 +39228,7 @@ var staticRenderFns = [
         _c("br")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "offset-md-1 row col-md-10 jumbotron" }, [
+      _c("div", { staticClass: "row col-md-12 jumbotron" }, [
         _c("table", { staticClass: "table" }, [
           _c("thead", { staticClass: "thead-dark" }, [
             _c("tr", [
@@ -55135,15 +55145,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************************************!*\
   !*** ./resources/js/components/oralcommunication/oralcommunication.vue ***!
   \*************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _oralcommunication_vue_vue_type_template_id_1c59b074___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./oralcommunication.vue?vue&type=template&id=1c59b074& */ "./resources/js/components/oralcommunication/oralcommunication.vue?vue&type=template&id=1c59b074&");
 /* harmony import */ var _oralcommunication_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./oralcommunication.vue?vue&type=script&lang=js& */ "./resources/js/components/oralcommunication/oralcommunication.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _oralcommunication_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _oralcommunication_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -55173,7 +55182,7 @@ component.options.__file = "resources/js/components/oralcommunication/oralcommun
 /*!**************************************************************************************************!*\
   !*** ./resources/js/components/oralcommunication/oralcommunication.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55249,8 +55258,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\htdocs\LtuAssessment\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\htdocs\LtuAssessment\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Git\LtuAssessment\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Git\LtuAssessment\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

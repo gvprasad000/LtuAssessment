@@ -47,6 +47,8 @@
                     <option value="8">H. MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication”</option>
                     </select>
                  </div>
+                 
+           
                  <div class="col-md-6">  
                         <label>File Upload (Delete any student name before you upload any file) </label><br />
                        <input id="upload-file" type="file" multiple class="form-control" @change="fieldChange">
@@ -60,11 +62,12 @@
                    
                     <div class="col-md-12">  
                         <div class="list-group">
-                        <div class="container">
+                        <div class="container bg-primary">
                         
                             <div class="panel panel-primary">
                                 <div class="panel-body">
-                                    Please choose a file to evaluate <button> <i @click="downlodFile" class="fas fa-file-download fa-2x float-right"></i></button>
+                                     <label style="font-size:20px">Please choose a file to evaluate</label> 
+                                     <button class="float-right"> <i @click="downlodFile" class="fas fa-file-download fa-2x float-right" style="color:#007bff;margin-top:5px"></i></button>
                                 </div>
 
                             </div>
