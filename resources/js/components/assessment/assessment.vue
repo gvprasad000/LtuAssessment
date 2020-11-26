@@ -5,7 +5,11 @@
         <div class="jumbotron color" >
      
             <div>
-                <h1>CBIT Student Evaluation Portfolio System</h1>
+             <blockquote  class="blockquote text-center margine bg-dark">
+                <p class="mb-0 make-bold" style="font-size: 30px;color:white">CBIT Student Evaluation Portfolio System</p>
+              
+            </blockquote>
+              
                 
                 <hr class="my-4" />
             </div>
@@ -66,7 +70,7 @@
                         
                             <div class="panel panel-primary">
                                 <div class="panel-body">
-                                     <label style="font-size:20px">Please choose a file to evaluate</label> 
+                                     <label style="font-size:20px;color:white">Please choose a file to evaluate</label> 
                                      <button class="float-right"> <i @click="downlodFile" class="fas fa-file-download fa-2x float-right" style="color:#007bff;margin-top:5px"></i></button>
                                 </div>
 

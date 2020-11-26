@@ -2023,6 +2023,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2115,6 +2119,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2360,6 +2373,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2490,6 +2507,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38386,9 +38412,11 @@ var render = function() {
               _c("div", { staticClass: "container bg-primary" }, [
                 _c("div", { staticClass: "panel panel-primary" }, [
                   _c("div", { staticClass: "panel-body" }, [
-                    _c("label", { staticStyle: { "font-size": "20px" } }, [
-                      _vm._v("Please choose a file to evaluate")
-                    ]),
+                    _c(
+                      "label",
+                      { staticStyle: { "font-size": "20px", color: "white" } },
+                      [_vm._v("Please choose a file to evaluate")]
+                    ),
                     _vm._v(" "),
                     _c("button", { staticClass: "float-right" }, [
                       _c("i", {
@@ -38480,7 +38508,20 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("h1", [_vm._v("CBIT Student Evaluation Portfolio System")]),
+      _c(
+        "blockquote",
+        { staticClass: "blockquote text-center margine bg-dark" },
+        [
+          _c(
+            "p",
+            {
+              staticClass: "mb-0 make-bold",
+              staticStyle: { "font-size": "30px", color: "white" }
+            },
+            [_vm._v("CBIT Student Evaluation Portfolio System")]
+          )
+        ]
+      ),
       _vm._v(" "),
       _c("hr", { staticClass: "my-4" })
     ])
@@ -38516,11 +38557,20 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", [
-        _c("blockquote", { staticClass: "blockquote text-center margine" }, [
-          _c("p", { staticClass: "mb-0 make-bold" }, [
-            _vm._v("TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS.")
-          ])
-        ]),
+        _c(
+          "blockquote",
+          { staticClass: "blockquote text-center margine bg-dark" },
+          [
+            _c(
+              "p",
+              {
+                staticClass: "mb-0 make-bold",
+                staticStyle: { "font-size": "30px", color: "white" }
+              },
+              [_vm._v("TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS")]
+            )
+          ]
+        ),
         _c("br"),
         _c("br"),
         _c("br")
@@ -38823,6 +38873,26 @@ var staticRenderFns = [
               _c("td", [
                 _c("input", {
                   attrs: { className: "form-control", type: "text" }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td", [
+                _c("input", {
+                  staticClass: "btn btn-primary",
+                  staticStyle: { width: "200px" },
+                  attrs: { type: "submit" }
                 })
               ])
             ])
@@ -39046,9 +39116,11 @@ var render = function() {
               _c("div", { staticClass: "container bg-primary" }, [
                 _c("div", { staticClass: "panel panel-primary" }, [
                   _c("div", { staticClass: "panel-body" }, [
-                    _c("label", { staticStyle: { "font-size": "20px" } }, [
-                      _vm._v("Please choose a file to evaluate")
-                    ]),
+                    _c(
+                      "label",
+                      { staticStyle: { "font-size": "20px", color: "white" } },
+                      [_vm._v("Please choose a file to evaluate")]
+                    ),
                     _vm._v(" "),
                     _c("button", { staticClass: "float-right" }, [
                       _c("i", {
@@ -39140,7 +39212,20 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("h1", [_vm._v("CBIT Student Evaluation Portfolio System")]),
+      _c(
+        "blockquote",
+        { staticClass: "blockquote text-center margine bg-dark" },
+        [
+          _c(
+            "p",
+            {
+              staticClass: "mb-0 make-bold",
+              staticStyle: { "font-size": "30px", color: "white" }
+            },
+            [_vm._v("CBIT Student Evaluation Portfolio System")]
+          )
+        ]
+      ),
       _vm._v(" "),
       _c("hr", { staticClass: "my-4" })
     ])
@@ -39218,11 +39303,20 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", [
-        _c("blockquote", { staticClass: "blockquote text-center margine" }, [
-          _c("p", { staticClass: "mb-0 make-bold" }, [
-            _vm._v("TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS.")
-          ])
-        ]),
+        _c(
+          "blockquote",
+          { staticClass: "blockquote text-center margine bg-dark" },
+          [
+            _c(
+              "p",
+              {
+                staticClass: "mb-0 make-bold",
+                staticStyle: { "font-size": "30px", color: "white" }
+              },
+              [_vm._v("TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS")]
+            )
+          ]
+        ),
         _c("br"),
         _c("br"),
         _c("br")
@@ -39525,6 +39619,26 @@ var staticRenderFns = [
               _c("td", [
                 _c("input", {
                   attrs: { className: "form-control", type: "text" }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td", [
+                _c("input", {
+                  staticClass: "btn btn-primary",
+                  staticStyle: { width: "200px" },
+                  attrs: { type: "submit" }
                 })
               ])
             ])

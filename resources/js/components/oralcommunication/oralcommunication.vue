@@ -2,8 +2,8 @@
 
      <div class="container">
            <div>
-             <blockquote  class="blockquote text-center margine">
-                <p class="mb-0 make-bold">TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS.</p>
+             <blockquote  class="blockquote text-center margine bg-dark">
+                <p class="mb-0 make-bold" style="font-size: 30px;color:white">TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS</p>
               
             </blockquote><br/><br/><br/>
         </div>
@@ -99,6 +99,15 @@
                             <td>Clean and well-groomed appearance, business casual attire.</td>
                             <td>Professional attire </td>
                             <td><input className="form-control"  type="text"/></td>
+                        </tr>
+                        
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><input class="btn btn-primary" style="width:200px" type="submit"/></td>
                         </tr>
                
             </tbody>
