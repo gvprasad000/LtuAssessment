@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 Route::any('/{any}', function () {
 
     return view('welcome');
-    
+
 })->where([ 'any' => '.*' ]);*/
 
 Auth::routes();
@@ -27,14 +27,6 @@ Route::get('/', 'AssessmentController@index')->where([ '/' => '.*' ]);
 Route::post('/upload','AssessmentController@upload');
 Route::get('files','AssessmentController@files');
 Route::get('downloads', 'AssessmentController@downloadFileRequest');
-/* Route::post('/upload',function(Request $request){
-    $uploadedFiles=$request->pics;
+Route::post('/saveoralcommunication','OralCommunicationController@saveOralCommunication');
 
-    foreach ($uploadedFiles as $file){
-        $file->store('dummy');
-
-    }
-    return $request;
-}); 
-//Route::get('/home', 'HomeController@index')->name('home');
 

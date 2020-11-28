@@ -2036,7 +2036,8 @@ __webpack_require__.r(__webpack_exports__);
       attachments: [],
       form: new FormData(),
       FileLists: "",
-      AssesFile: ""
+      AssesFile: "",
+      AssessmentObject: []
     };
   },
   props: ['products'],
@@ -2061,8 +2062,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.form.append('AssesName', this.AssesName);
-      this.form.append('AssesSemseter', this.AssesSemseter);
-      this.form.append('AssesOutcome', this.AssesOutcome);
+      this.form.append('AssesSemseter', this.AssesSemseter.id);
+      this.form.append('AssesOutcome', this.AssesOutcome.id);
       var config = {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -2080,11 +2081,11 @@ __webpack_require__.r(__webpack_exports__);
     getAllFiles: function getAllFiles() {
       var _this = this;
 
-      this.$emit('change', this.AssesOutcome);
+      this.$emit('change', this.AssesOutcome.id);
       axios.get('/files', {
         params: {
-          AssesSemseter: this.AssesSemseter,
-          AssesOutcome: this.AssesOutcome
+          AssesSemseter: this.AssesSemseter.id,
+          AssesOutcome: this.AssesOutcome.id
         }
       }).then(function (response) {
         // console.log(response.data);
@@ -2096,11 +2097,19 @@ __webpack_require__.r(__webpack_exports__);
     downlodFile: function downlodFile() {
       axios.get('/downloads', {
         params: {
-          fileparam: this.AssesFile
+          fileparam: this.AssesFile.id
         }
       }).then(function (res) {
         window.open("/storage/" + res.data);
       });
+    },
+    sendProps: function sendProps() {
+      this.AssessmentObject.splice(0);
+      this.AssessmentObject.push(this.AssesName);
+      this.AssessmentObject.push(this.AssesSemseter);
+      this.AssessmentObject.push(this.AssesOutcome);
+      this.AssessmentObject.push(this.AssesFile);
+      this.$emit('AssessmentObject', this.AssessmentObject);
     }
   },
   mounted: function mounted() {
@@ -2241,11 +2250,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      oral_comm_use_media: "",
+      oral_comm_quality_slides: "",
+      oral_comm_opening_statement: "",
+      oral_comm_organization: "",
+      oral_comm_content: "",
+      oral_comm_conclusion: "",
+      oral_comm_timing: "",
+      oral_comm_clarity: "",
+      oral_comm_audience: "",
+      oral_comm_apperance: "",
+      Oral_comm_Object: []
+    };
+  },
+  methods: {
+    oralCommunicationAssessentData: function oralCommunicationAssessentData() {
+      this.Oral_comm_Object.splice(0);
+      this.Oral_comm_Object.push(this.oral_comm_use_media);
+      this.Oral_comm_Object.push(this.oral_comm_quality_slides);
+      this.Oral_comm_Object.push(this.oral_comm_opening_statement);
+      this.Oral_comm_Object.push(this.oral_comm_organization);
+      this.Oral_comm_Object.push(this.oral_comm_content);
+      this.Oral_comm_Object.push(this.oral_comm_conclusion);
+      this.Oral_comm_Object.push(this.oral_comm_timing);
+      this.Oral_comm_Object.push(this.oral_comm_clarity);
+      this.Oral_comm_Object.push(this.oral_comm_audience);
+      this.Oral_comm_Object.push(this.oral_comm_apperance);
+      this.$emit('OralCommObject', this.Oral_comm_Object);
+    }
   }
 });
-
-methods: {}
 
 /***/ }),
 
@@ -2386,7 +2421,8 @@ __webpack_require__.r(__webpack_exports__);
       attachments: [],
       form: new FormData(),
       FileLists: "",
-      AssesFile: ""
+      AssesFile: "",
+      AssessmentObject: []
     };
   },
   props: ['products'],
@@ -2411,8 +2447,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.form.append('AssesName', this.AssesName);
-      this.form.append('AssesSemseter', this.AssesSemseter);
-      this.form.append('AssesOutcome', this.AssesOutcome);
+      this.form.append('AssesSemseter', this.AssesSemseter.id);
+      this.form.append('AssesOutcome', this.AssesOutcome.id);
       var config = {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -2430,11 +2466,11 @@ __webpack_require__.r(__webpack_exports__);
     getAllFiles: function getAllFiles() {
       var _this = this;
 
-      this.$emit('change', this.AssesOutcome);
+      this.$emit('change', this.AssesOutcome.id);
       axios.get('/files', {
         params: {
-          AssesSemseter: this.AssesSemseter,
-          AssesOutcome: this.AssesOutcome
+          AssesSemseter: this.AssesSemseter.id,
+          AssesOutcome: this.AssesOutcome.id
         }
       }).then(function (response) {
         // console.log(response.data);
@@ -2446,11 +2482,19 @@ __webpack_require__.r(__webpack_exports__);
     downlodFile: function downlodFile() {
       axios.get('/downloads', {
         params: {
-          fileparam: this.AssesFile
+          fileparam: this.AssesFile.id
         }
       }).then(function (res) {
         window.open("/storage/" + res.data);
       });
+    },
+    sendProps: function sendProps() {
+      this.AssessmentObject.splice(0);
+      this.AssessmentObject.push(this.AssesName);
+      this.AssessmentObject.push(this.AssesSemseter);
+      this.AssessmentObject.push(this.AssesOutcome);
+      this.AssessmentObject.push(this.AssesFile);
+      this.$emit('AssessmentObject', this.AssessmentObject);
     }
   },
   mounted: function mounted() {
@@ -2482,13 +2526,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      AssesOutcomevalue: ""
+      AssesOutcomevalue: "",
+      AssessmentDetails: [],
+      OralCommunicationData: []
     };
   },
   methods: {
-    AssesOutcome: function AssesOutcome(value) {
+    assesOutcome: function assesOutcome(value) {
       this.AssesOutcomevalue = value;
-      console.log(value);
+    },
+    getAssessmentDetails: function getAssessmentDetails(value) {
+      this.AssessmentDetails = value;
+    },
+    saveOralCommunication: function saveOralCommunication(value) {
+      this.OralCommunicationData = value;
+      var OralCommFormData = new FormData();
+      OralCommFormData.append('AssessData', JSON.stringify(this.AssessmentDetails));
+      OralCommFormData.append('OralData', this.OralCommunicationData);
+      var config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+      axios.post('/saveoralcommunication', OralCommFormData, config).then(function (response) {
+        //success
+        // console.log(response);
+        location.reload();
+      })["catch"](function (response) {//error
+      });
     }
   },
   mounted: function mounted() {
@@ -2629,11 +2694,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      oral_comm_use_media: "",
+      oral_comm_quality_slides: "",
+      oral_comm_opening_statement: "",
+      oral_comm_organization: "",
+      oral_comm_content: "",
+      oral_comm_conclusion: "",
+      oral_comm_timing: "",
+      oral_comm_clarity: "",
+      oral_comm_audience: "",
+      oral_comm_apperance: "",
+      Oral_comm_Object: []
+    };
+  },
+  methods: {
+    oralCommunicationAssessentData: function oralCommunicationAssessentData() {
+      this.Oral_comm_Object.splice(0);
+      this.Oral_comm_Object.push(this.oral_comm_use_media);
+      this.Oral_comm_Object.push(this.oral_comm_quality_slides);
+      this.Oral_comm_Object.push(this.oral_comm_opening_statement);
+      this.Oral_comm_Object.push(this.oral_comm_organization);
+      this.Oral_comm_Object.push(this.oral_comm_content);
+      this.Oral_comm_Object.push(this.oral_comm_conclusion);
+      this.Oral_comm_Object.push(this.oral_comm_timing);
+      this.Oral_comm_Object.push(this.oral_comm_clarity);
+      this.Oral_comm_Object.push(this.oral_comm_audience);
+      this.Oral_comm_Object.push(this.oral_comm_apperance);
+      this.$emit('OralCommObject', this.Oral_comm_Object);
+    }
   }
 });
-
-methods: {}
 
 /***/ }),
 
@@ -38287,13 +38378,23 @@ var render = function() {
                   _vm._v("Please select the semester and year for assessment")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("Fall 2020")]),
+                _c(
+                  "option",
+                  { domProps: { value: { id: "1", text: "Fall 2020" } } },
+                  [_vm._v("Fall 2020")]
+                ),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("Spring 2021")
-                ]),
+                _c(
+                  "option",
+                  { domProps: { value: { id: "2", text: "Spring 2021" } } },
+                  [_vm._v("Spring 2021")]
+                ),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [_vm._v("Summer 2021")])
+                _c(
+                  "option",
+                  { domProps: { value: { id: "3", text: "Summer 2020" } } },
+                  [_vm._v("Summer 2021")]
+                )
               ]
             )
           ])
@@ -38342,56 +38443,145 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [
-                _vm._v("A. ACC 2013 Intro to Financial Accounting: “Ethics”")
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "1",
+                      text: "ACC 2013 Intro to Financial Accounting: Ethics"
+                    }
+                  }
+                },
+                [_vm._v("A. ACC 2013 Intro to Financial Accounting: “Ethics”")]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [
-                _vm._v("B. FIN 3103 Financial Management: “Critical Thinking”")
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "2",
+                      text: "FIN 3103 Financial Management: Critical Thinking"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "B. FIN 3103 Financial Management: “Critical Thinking”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "3" } }, [
-                _vm._v("C. HRM 3023 Human Resource Management: “Ethics”")
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "3",
+                      text: "HRM 3023 Human Resource Management: Ethics"
+                    }
+                  }
+                },
+                [_vm._v("C. HRM 3023 Human Resource Management: “Ethics”")]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "6" } }, [
-                _vm._v(
-                  "D. HRM 3023 Human Resource Management: “Oral Communication”"
-                )
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "6",
+                      text:
+                        "HRM 3023 Human Resource Management: Oral Communication"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "D. HRM 3023 Human Resource Management: “Oral Communication”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "4" } }, [
-                _vm._v(
-                  "E. HRM 3023 Human Resource Management: “Written Communication”"
-                )
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "4",
+                      text:
+                        "HRM 3023 Human Resource Management: Written Communication"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "E. HRM 3023 Human Resource Management: “Written Communication”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "5" } }, [
-                _vm._v(
-                  "F. MGT 2113 Introduction to Business Law: “Critical Thinking”"
-                )
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "5",
+                      text:
+                        "MGT 2113 Introduction to Business Law: “Critical Thinking"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "F. MGT 2113 Introduction to Business Law: “Critical Thinking”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "7" } }, [
-                _vm._v(
-                  "G. MGT 2203-01 Principles of Management (BSIT/BSBA): “Leadership”"
-                )
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "7",
+                      text:
+                        "MGT 2203-01 Principles of Management (BSIT/BSBA): Leadership"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "G. MGT 2203-01 Principles of Management (BSIT/BSBA): “Leadership”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "8" } }, [
-                _vm._v(
-                  "H. MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication”"
-                )
-              ])
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "8",
+                      text:
+                        "MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "H. MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication”"
+                  )
+                ]
+              )
             ]
           )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
           _c("label", [
-            _vm._v(
-              "File Upload (Delete any student name before you upload any file) "
-            )
+            _vm._v("File Upload (Please choose mutilple files if needed) ")
           ]),
           _c("br"),
           _vm._v(" "),
@@ -38442,19 +38632,22 @@ var render = function() {
                   ],
                   staticClass: "form-control",
                   on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.AssesFile = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.AssesFile = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.sendProps
+                    ]
                   }
                 },
                 [
@@ -38463,9 +38656,18 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm._l(_vm.FileLists, function(FileList) {
-                    return _c("option", { domProps: { value: FileList.id } }, [
-                      _vm._v(_vm._s(FileList.str_file_name))
-                    ])
+                    return _c(
+                      "option",
+                      {
+                        domProps: {
+                          value: {
+                            id: FileList.id,
+                            text: FileList.str_file_name
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(FileList.str_file_name))]
+                    )
                   })
                 ],
                 2
@@ -38548,356 +38750,547 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row col-md-12 jumbotron" }, [
+      _c("table", { staticClass: "table" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("tbody", [
+          _c("tr", [
+            _c("th", { attrs: { scope: "row", rowSpan: "2" } }, [
+              _vm._v(
+                "Graduates can demonstrate mastery of communication technology"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Use of Media  ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Lack of/or misuse of media detracts from the presentation objective "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Use of media supports and contributes to the presentation objective"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Use of media supports, clarifies and reinforces the presentation objective "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_use_media,
+                    expression: "oral_comm_use_media"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_use_media },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_use_media = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Quality of Slides ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Misuse (not enough or too much) of colors, animations and fonts detracts from the presentation objective"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Use of colors, animations, fonts supports the presentation objective"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Use of colors, animations, fonts supports, clarifies and reinforces the presentation objective "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_quality_slides,
+                    expression: "oral_comm_quality_slides"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_quality_slides },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_quality_slides = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", { attrs: { scope: "row", rowSpan: "5" } }, [
+              _vm._v(
+                "Graduates can develop and deliver a compelling oral presentation grounded in relevant information and facts"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Opening statement ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Missing opening statement or statement does not introduce topic"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Clear opening statement introduces topic ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Clear opening statement introduces topic, captures audience attention  and sets tone for presentation"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_opening_statement,
+                    expression: "oral_comm_opening_statement"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_opening_statement },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_opening_statement = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Organization")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v("Presentation is disorganized and/or not well sequenced")
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Presentation is organized and well sequenced with transitions. It previews and covers main points"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Presentation is organized and well sequenced with smooth transitions. It previews, covers, and develops main points"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_organization,
+                    expression: "oral_comm_organization"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_organization },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_organization = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Content")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Content is irrelevant or incorrect with no supporting evidence"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v("Content is relevant and correct with supporting evidence")
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Content is relevant and correct with supporting evidence, and incorporates innovative insights"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_content,
+                    expression: "oral_comm_content"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_content },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_content = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Conclusion")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Conclusion missing or content does not support the conclusion"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Conclusion is supported by content and contains a review of key points"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Conclusion is supported by content, contains a review of key points, and stimulates further inquiry with closing thought"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_conclusion,
+                    expression: "oral_comm_conclusion"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_conclusion },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_conclusion = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Timing")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Presentation is too short resulting in insufficient coverage of material or is too long"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Utilizes allotted time to provide sufficient coverage of material"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Utilizes allotted time to provide sufficient coverage of material in a well-paced manner"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_timing,
+                    expression: "oral_comm_timing"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_timing },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_timing = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", { attrs: { scope: "row", rowSpan: "3" } }, [
+              _vm._v(
+                "Graduates can deliver a compelling oral presentation with clarity and appropriate poise"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Clarity of Speech")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Inaudible or confusing, with a lack of fluency and predominant use of sloppy speech patterns"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Sufficient volume, understandable, avoids sloppy speech patterns "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Modulates volume to hold audience attention. Is clear,  articulate, fluent"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_clarity,
+                    expression: "oral_comm_clarity"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_clarity },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_clarity = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Engages Audience ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Avoids eye contact, reads from slides or notes, or speaks in a monotone"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Establishes eye contact and ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Engages Audience ")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_audience,
+                    expression: "oral_comm_audience"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_audience },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_audience = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Appearance ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Unprofessional or distracting appearance")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Clean and well-groomed appearance, business casual attire."
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Professional attire ")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_apperance,
+                    expression: "oral_comm_apperance"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_apperance },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_apperance = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td"),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                staticClass: "btn btn-primary",
+                staticStyle: { width: "200px" },
+                attrs: { type: "submit" },
+                on: { click: _vm.oralCommunicationAssessentData }
+              })
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", [
-        _c(
-          "blockquote",
-          { staticClass: "blockquote text-center margine bg-dark" },
-          [
-            _c(
-              "p",
-              {
-                staticClass: "mb-0 make-bold",
-                staticStyle: { "font-size": "30px", color: "white" }
-              },
-              [_vm._v("TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS")]
-            )
-          ]
-        ),
-        _c("br"),
-        _c("br"),
-        _c("br")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row col-md-12 jumbotron" }, [
-        _c("table", { staticClass: "table" }, [
-          _c("thead", { staticClass: "thead-dark" }, [
-            _c("tr", [
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("OBJECTIVE")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("TRAIT")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [
-                _vm._v("DEFICIENT (1…2) ")
-              ]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [
-                _vm._v("COMPETENT (3…4) ")
-              ]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [
-                _vm._v("EXEMPLARY (5…6) ")
-              ]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("SCORE ")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("th", { attrs: { scope: "row", rowSpan: "2" } }, [
-                _vm._v(
-                  "Graduates can demonstrate mastery of communication technology"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Use of Media  ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Lack of/or misuse of media detracts from the presentation objective "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Use of media supports and contributes to the presentation objective"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Use of media supports, clarifies and reinforces the presentation objective "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Quality of Slides ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Misuse (not enough or too much) of colors, animations and fonts detracts from the presentation objective"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Use of colors, animations, fonts supports the presentation objective"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Use of colors, animations, fonts supports, clarifies and reinforces the presentation objective "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { attrs: { scope: "row", rowSpan: "5" } }, [
-                _vm._v(
-                  "Graduates can develop and deliver a compelling oral presentation grounded in relevant information and facts"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Opening statement ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Missing opening statement or statement does not introduce topic"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Clear opening statement introduces topic ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Clear opening statement introduces topic, captures audience attention  and sets tone for presentation"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Organization")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v("Presentation is disorganized and/or not well sequenced")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Presentation is organized and well sequenced with transitions. It previews and covers main points"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Presentation is organized and well sequenced with smooth transitions. It previews, covers, and develops main points"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Content")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Content is irrelevant or incorrect with no supporting evidence"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Content is relevant and correct with supporting evidence"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Content is relevant and correct with supporting evidence, and incorporates innovative insights"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Conclusion")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Conclusion missing or content does not support the conclusion"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Conclusion is supported by content and contains a review of key points"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Conclusion is supported by content, contains a review of key points, and stimulates further inquiry with closing thought"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Timing")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Presentation is too short resulting in insufficient coverage of material or is too long"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Utilizes allotted time to provide sufficient coverage of material"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Utilizes allotted time to provide sufficient coverage of material in a well-paced manner"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { attrs: { scope: "row", rowSpan: "3" } }, [
-                _vm._v(
-                  "Graduates can deliver a compelling oral presentation with clarity and appropriate poise"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Clarity of Speech")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Inaudible or confusing, with a lack of fluency and predominant use of sloppy speech patterns"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Sufficient volume, understandable, avoids sloppy speech patterns "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Modulates volume to hold audience attention. Is clear,  articulate, fluent"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Engages Audience ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Avoids eye contact, reads from slides or notes, or speaks in a monotone"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Establishes eye contact and ")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Engages Audience ")]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Appearance ")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Unprofessional or distracting appearance")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Clean and well-groomed appearance, business casual attire."
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Professional attire ")]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  staticClass: "btn btn-primary",
-                  staticStyle: { width: "200px" },
-                  attrs: { type: "submit" }
-                })
-              ])
-            ])
-          ])
-        ])
+    return _c("div", [
+      _c(
+        "blockquote",
+        { staticClass: "blockquote text-center margine bg-dark" },
+        [
+          _c(
+            "p",
+            {
+              staticClass: "mb-0 make-bold",
+              staticStyle: { "font-size": "30px", color: "white" }
+            },
+            [_vm._v("TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS")]
+          )
+        ]
+      ),
+      _c("br"),
+      _c("br"),
+      _c("br")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("OBJECTIVE")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("TRAIT")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("DEFICIENT"),
+          _c("br"),
+          _vm._v(" (1…2) ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("COMPETENT"),
+          _c("br"),
+          _vm._v(" (3…4) ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("EXEMPLARY"),
+          _c("br"),
+          _vm._v(" (5…6) ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("SCORE ")])
       ])
     ])
   }
@@ -38991,13 +39384,23 @@ var render = function() {
                   _vm._v("Please select the semester and year for assessment")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("Fall 2020")]),
+                _c(
+                  "option",
+                  { domProps: { value: { id: "1", text: "Fall 2020" } } },
+                  [_vm._v("Fall 2020")]
+                ),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("Spring 2021")
-                ]),
+                _c(
+                  "option",
+                  { domProps: { value: { id: "2", text: "Spring 2021" } } },
+                  [_vm._v("Spring 2021")]
+                ),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [_vm._v("Summer 2021")])
+                _c(
+                  "option",
+                  { domProps: { value: { id: "3", text: "Summer 2020" } } },
+                  [_vm._v("Summer 2021")]
+                )
               ]
             )
           ])
@@ -39046,56 +39449,145 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [
-                _vm._v("A. ACC 2013 Intro to Financial Accounting: “Ethics”")
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "1",
+                      text: "ACC 2013 Intro to Financial Accounting: Ethics"
+                    }
+                  }
+                },
+                [_vm._v("A. ACC 2013 Intro to Financial Accounting: “Ethics”")]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [
-                _vm._v("B. FIN 3103 Financial Management: “Critical Thinking”")
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "2",
+                      text: "FIN 3103 Financial Management: Critical Thinking"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "B. FIN 3103 Financial Management: “Critical Thinking”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "3" } }, [
-                _vm._v("C. HRM 3023 Human Resource Management: “Ethics”")
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "3",
+                      text: "HRM 3023 Human Resource Management: Ethics"
+                    }
+                  }
+                },
+                [_vm._v("C. HRM 3023 Human Resource Management: “Ethics”")]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "6" } }, [
-                _vm._v(
-                  "D. HRM 3023 Human Resource Management: “Oral Communication”"
-                )
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "6",
+                      text:
+                        "HRM 3023 Human Resource Management: Oral Communication"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "D. HRM 3023 Human Resource Management: “Oral Communication”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "4" } }, [
-                _vm._v(
-                  "E. HRM 3023 Human Resource Management: “Written Communication”"
-                )
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "4",
+                      text:
+                        "HRM 3023 Human Resource Management: Written Communication"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "E. HRM 3023 Human Resource Management: “Written Communication”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "5" } }, [
-                _vm._v(
-                  "F. MGT 2113 Introduction to Business Law: “Critical Thinking”"
-                )
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "5",
+                      text:
+                        "MGT 2113 Introduction to Business Law: “Critical Thinking"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "F. MGT 2113 Introduction to Business Law: “Critical Thinking”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "7" } }, [
-                _vm._v(
-                  "G. MGT 2203-01 Principles of Management (BSIT/BSBA): “Leadership”"
-                )
-              ]),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "7",
+                      text:
+                        "MGT 2203-01 Principles of Management (BSIT/BSBA): Leadership"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "G. MGT 2203-01 Principles of Management (BSIT/BSBA): “Leadership”"
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "8" } }, [
-                _vm._v(
-                  "H. MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication”"
-                )
-              ])
+              _c(
+                "option",
+                {
+                  domProps: {
+                    value: {
+                      id: "8",
+                      text:
+                        "MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication"
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "H. MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication”"
+                  )
+                ]
+              )
             ]
           )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
           _c("label", [
-            _vm._v(
-              "File Upload (Delete any student name before you upload any file) "
-            )
+            _vm._v("File Upload (Please choose mutilple files if needed) ")
           ]),
           _c("br"),
           _vm._v(" "),
@@ -39146,19 +39638,22 @@ var render = function() {
                   ],
                   staticClass: "form-control",
                   on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.AssesFile = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.AssesFile = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.sendProps
+                    ]
                   }
                 },
                 [
@@ -39167,9 +39662,18 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm._l(_vm.FileLists, function(FileList) {
-                    return _c("option", { domProps: { value: FileList.id } }, [
-                      _vm._v(_vm._s(FileList.str_file_name))
-                    ])
+                    return _c(
+                      "option",
+                      {
+                        domProps: {
+                          value: {
+                            id: FileList.id,
+                            text: FileList.str_file_name
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(FileList.str_file_name))]
+                    )
                   })
                 ],
                 2
@@ -39258,13 +39762,28 @@ var render = function() {
       _c("assessment", {
         on: {
           change: function($event) {
-            return _vm.AssesOutcome($event)
+            return _vm.assesOutcome($event)
+          },
+          AssessmentObject: function($event) {
+            return _vm.getAssessmentDetails($event)
           }
         }
       }),
       _vm._v(" "),
-      _vm.AssesOutcomevalue == 1
-        ? _c("div", [_c("oralcommunication")], 1)
+      _vm.AssesOutcomevalue == 6
+        ? _c(
+            "div",
+            [
+              _c("oralcommunication", {
+                on: {
+                  OralCommObject: function($event) {
+                    return _vm.saveOralCommunication($event)
+                  }
+                }
+              })
+            ],
+            1
+          )
         : _vm._e(),
       _vm._v(" "),
       _c("router-view")
@@ -39294,356 +39813,547 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row col-md-12 jumbotron" }, [
+      _c("table", { staticClass: "table" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("tbody", [
+          _c("tr", [
+            _c("th", { attrs: { scope: "row", rowSpan: "2" } }, [
+              _vm._v(
+                "Graduates can demonstrate mastery of communication technology"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Use of Media  ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Lack of/or misuse of media detracts from the presentation objective "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Use of media supports and contributes to the presentation objective"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Use of media supports, clarifies and reinforces the presentation objective "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_use_media,
+                    expression: "oral_comm_use_media"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_use_media },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_use_media = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Quality of Slides ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Misuse (not enough or too much) of colors, animations and fonts detracts from the presentation objective"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Use of colors, animations, fonts supports the presentation objective"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Use of colors, animations, fonts supports, clarifies and reinforces the presentation objective "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_quality_slides,
+                    expression: "oral_comm_quality_slides"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_quality_slides },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_quality_slides = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", { attrs: { scope: "row", rowSpan: "5" } }, [
+              _vm._v(
+                "Graduates can develop and deliver a compelling oral presentation grounded in relevant information and facts"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Opening statement ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Missing opening statement or statement does not introduce topic"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Clear opening statement introduces topic ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Clear opening statement introduces topic, captures audience attention  and sets tone for presentation"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_opening_statement,
+                    expression: "oral_comm_opening_statement"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_opening_statement },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_opening_statement = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Organization")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v("Presentation is disorganized and/or not well sequenced")
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Presentation is organized and well sequenced with transitions. It previews and covers main points"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Presentation is organized and well sequenced with smooth transitions. It previews, covers, and develops main points"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_organization,
+                    expression: "oral_comm_organization"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_organization },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_organization = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Content")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Content is irrelevant or incorrect with no supporting evidence"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v("Content is relevant and correct with supporting evidence")
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Content is relevant and correct with supporting evidence, and incorporates innovative insights"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_content,
+                    expression: "oral_comm_content"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_content },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_content = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Conclusion")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Conclusion missing or content does not support the conclusion"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Conclusion is supported by content and contains a review of key points"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Conclusion is supported by content, contains a review of key points, and stimulates further inquiry with closing thought"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_conclusion,
+                    expression: "oral_comm_conclusion"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_conclusion },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_conclusion = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Timing")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Presentation is too short resulting in insufficient coverage of material or is too long"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Utilizes allotted time to provide sufficient coverage of material"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Utilizes allotted time to provide sufficient coverage of material in a well-paced manner"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_timing,
+                    expression: "oral_comm_timing"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_timing },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_timing = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", { attrs: { scope: "row", rowSpan: "3" } }, [
+              _vm._v(
+                "Graduates can deliver a compelling oral presentation with clarity and appropriate poise"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Clarity of Speech")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Inaudible or confusing, with a lack of fluency and predominant use of sloppy speech patterns"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Sufficient volume, understandable, avoids sloppy speech patterns "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Modulates volume to hold audience attention. Is clear,  articulate, fluent"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_clarity,
+                    expression: "oral_comm_clarity"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_clarity },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_clarity = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Engages Audience ")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Avoids eye contact, reads from slides or notes, or speaks in a monotone"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Establishes eye contact and ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Engages Audience ")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_audience,
+                    expression: "oral_comm_audience"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_audience },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_audience = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Appearance ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Unprofessional or distracting appearance")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "Clean and well-groomed appearance, business casual attire."
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Professional attire ")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.oral_comm_apperance,
+                    expression: "oral_comm_apperance"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.oral_comm_apperance },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.oral_comm_apperance = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td"),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                staticClass: "btn btn-primary",
+                staticStyle: { width: "200px" },
+                attrs: { type: "submit" },
+                on: { click: _vm.oralCommunicationAssessentData }
+              })
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", [
-        _c(
-          "blockquote",
-          { staticClass: "blockquote text-center margine bg-dark" },
-          [
-            _c(
-              "p",
-              {
-                staticClass: "mb-0 make-bold",
-                staticStyle: { "font-size": "30px", color: "white" }
-              },
-              [_vm._v("TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS")]
-            )
-          ]
-        ),
-        _c("br"),
-        _c("br"),
-        _c("br")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row col-md-12 jumbotron" }, [
-        _c("table", { staticClass: "table" }, [
-          _c("thead", { staticClass: "thead-dark" }, [
-            _c("tr", [
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("OBJECTIVE")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("TRAIT")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [
-                _vm._v("DEFICIENT (1…2) ")
-              ]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [
-                _vm._v("COMPETENT (3…4) ")
-              ]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [
-                _vm._v("EXEMPLARY (5…6) ")
-              ]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("SCORE ")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("th", { attrs: { scope: "row", rowSpan: "2" } }, [
-                _vm._v(
-                  "Graduates can demonstrate mastery of communication technology"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Use of Media  ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Lack of/or misuse of media detracts from the presentation objective "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Use of media supports and contributes to the presentation objective"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Use of media supports, clarifies and reinforces the presentation objective "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Quality of Slides ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Misuse (not enough or too much) of colors, animations and fonts detracts from the presentation objective"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Use of colors, animations, fonts supports the presentation objective"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Use of colors, animations, fonts supports, clarifies and reinforces the presentation objective "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { attrs: { scope: "row", rowSpan: "5" } }, [
-                _vm._v(
-                  "Graduates can develop and deliver a compelling oral presentation grounded in relevant information and facts"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Opening statement ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Missing opening statement or statement does not introduce topic"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Clear opening statement introduces topic ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Clear opening statement introduces topic, captures audience attention  and sets tone for presentation"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Organization")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v("Presentation is disorganized and/or not well sequenced")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Presentation is organized and well sequenced with transitions. It previews and covers main points"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Presentation is organized and well sequenced with smooth transitions. It previews, covers, and develops main points"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Content")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Content is irrelevant or incorrect with no supporting evidence"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Content is relevant and correct with supporting evidence"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Content is relevant and correct with supporting evidence, and incorporates innovative insights"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Conclusion")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Conclusion missing or content does not support the conclusion"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Conclusion is supported by content and contains a review of key points"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Conclusion is supported by content, contains a review of key points, and stimulates further inquiry with closing thought"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Timing")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Presentation is too short resulting in insufficient coverage of material or is too long"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Utilizes allotted time to provide sufficient coverage of material"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Utilizes allotted time to provide sufficient coverage of material in a well-paced manner"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { attrs: { scope: "row", rowSpan: "3" } }, [
-                _vm._v(
-                  "Graduates can deliver a compelling oral presentation with clarity and appropriate poise"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Clarity of Speech")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Inaudible or confusing, with a lack of fluency and predominant use of sloppy speech patterns"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Sufficient volume, understandable, avoids sloppy speech patterns "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Modulates volume to hold audience attention. Is clear,  articulate, fluent"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Engages Audience ")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Avoids eye contact, reads from slides or notes, or speaks in a monotone"
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Establishes eye contact and ")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Engages Audience ")]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Appearance ")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Unprofessional or distracting appearance")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Clean and well-groomed appearance, business casual attire."
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Professional attire ")]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  attrs: { className: "form-control", type: "text" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  staticClass: "btn btn-primary",
-                  staticStyle: { width: "200px" },
-                  attrs: { type: "submit" }
-                })
-              ])
-            ])
-          ])
-        ])
+    return _c("div", [
+      _c(
+        "blockquote",
+        { staticClass: "blockquote text-center margine bg-dark" },
+        [
+          _c(
+            "p",
+            {
+              staticClass: "mb-0 make-bold",
+              staticStyle: { "font-size": "30px", color: "white" }
+            },
+            [_vm._v("TRAITS AND RUBRIC FOR ORAL PRESENTATION SKILLS")]
+          )
+        ]
+      ),
+      _c("br"),
+      _c("br"),
+      _c("br")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("OBJECTIVE")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("TRAIT")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("DEFICIENT"),
+          _c("br"),
+          _vm._v(" (1…2) ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("COMPETENT"),
+          _c("br"),
+          _vm._v(" (3…4) ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("EXEMPLARY"),
+          _c("br"),
+          _vm._v(" (5…6) ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("SCORE ")])
       ])
     ])
   }

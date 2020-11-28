@@ -1,60 +1,60 @@
 <template>
 <div class="container">
- 
+
 
         <div class="jumbotron color" >
-     
+
             <div>
              <blockquote  class="blockquote text-center margine bg-dark">
                 <p class="mb-0 make-bold" style="font-size: 30px;color:white">CBIT Student Evaluation Portfolio System</p>
-              
+
             </blockquote>
-              
-                
+
+
                 <hr class="my-4" />
             </div>
-           
+
 
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-6">  
+                    <div class="col-md-6">
                         <label>Name</label>
                         <input type="text" v-model="AssesName" class="form-control" placeholder="Please enter your name"/>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <label>Semester & Year</label>
                         <select v-model="AssesSemseter" class="form-control">
                             <option value="">Please select the semester and year for assessment</option>
-                            <option value="1">Fall 2020</option>
-                            <option value="2">Spring 2021</option>
-                            <option value="3">Summer 2021</option>
+                            <option :value="{id:'1',text:'Fall 2020'}">Fall 2020</option>
+                            <option :value="{id:'2',text:'Spring 2021'}">Spring 2021</option>
+                            <option :value="{id:'3',text:'Summer 2020'}">Summer 2021</option>
                         </select>
                      </div>
                  </div>
-                
+
             </div>
 
             <div class="row">
-                
+
                 <div class="col-md-6">
                     <label>Course & Learning Outcome</label>
                     <select v-model="AssesOutcome" @change="getAllFiles" class="form-control">
                     <option value="">Please select the course and learning outcome for assessment</option>
-                    <option value="1">A. ACC 2013 Intro to Financial Accounting: “Ethics”</option>
-                    <option value="2">B. FIN 3103 Financial Management: “Critical Thinking”</option>
-                    <option value="3">C. HRM 3023 Human Resource Management: “Ethics”</option>
-                    <option value="6">D. HRM 3023 Human Resource Management: “Oral Communication”</option>
-                    <option value="4">E. HRM 3023 Human Resource Management: “Written Communication”</option>
-                    <option value="5">F. MGT 2113 Introduction to Business Law: “Critical Thinking”</option>
-                    <option value="7">G. MGT 2203-01 Principles of Management (BSIT/BSBA): “Leadership”</option>
-                    <option value="8">H. MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication”</option>
+                    <option :value="{id:'1',text: 'ACC 2013 Intro to Financial Accounting: Ethics'}">A. ACC 2013 Intro to Financial Accounting: “Ethics”</option>
+                    <option :value="{id:'2',text: 'FIN 3103 Financial Management: Critical Thinking'}">B. FIN 3103 Financial Management: “Critical Thinking”</option>
+                    <option :value="{id:'3',text: 'HRM 3023 Human Resource Management: Ethics'}">C. HRM 3023 Human Resource Management: “Ethics”</option>
+                    <option :value="{id:'6',text: 'HRM 3023 Human Resource Management: Oral Communication'}">D. HRM 3023 Human Resource Management: “Oral Communication”</option>
+                    <option :value="{id:'4',text: 'HRM 3023 Human Resource Management: Written Communication'}">E. HRM 3023 Human Resource Management: “Written Communication”</option>
+                    <option :value="{id:'5',text: 'MGT 2113 Introduction to Business Law: “Critical Thinking'}">F. MGT 2113 Introduction to Business Law: “Critical Thinking”</option>
+                    <option :value="{id:'7',text: 'MGT 2203-01 Principles of Management (BSIT/BSBA): Leadership'}">G. MGT 2203-01 Principles of Management (BSIT/BSBA): “Leadership”</option>
+                    <option :value="{id:'8',text: 'MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication'}">H. MGT 2203-02 Principles of Management (BSIT/BSBA): “Written Communication”</option>
                     </select>
                  </div>
-                 
-           
-                 <div class="col-md-6">  
-                        <label>File Upload (Delete any student name before you upload any file) </label><br />
+
+
+                 <div class="col-md-6">
+                        <label>File Upload (Please choose mutilple files if needed) </label><br />
                        <input id="upload-file" type="file" multiple class="form-control" @change="fieldChange">
                     </div>
             </div>
@@ -63,62 +63,62 @@
 
             <div class="form-group">
                 <div class="row">
-                   
-                    <div class="col-md-12">  
+
+                    <div class="col-md-12">
                         <div class="list-group">
                         <div class="container bg-primary">
-                        
+
                             <div class="panel panel-primary">
                                 <div class="panel-body">
-                                     <label style="font-size:20px;color:white">Please choose a file to evaluate</label> 
+                                     <label style="font-size:20px;color:white">Please choose a file to evaluate</label>
                                      <button class="float-right"> <i @click="downlodFile" class="fas fa-file-download fa-2x float-right" style="color:#007bff;margin-top:5px"></i></button>
                                 </div>
 
                             </div>
-                                
+
                         </div>
-                         
-                             <select  v-model="AssesFile"  class="form-control">
+
+                             <select @change="sendProps" v-model="AssesFile"  class="form-control">
                                 <option value="">Please choose a file to evaluate</option>
-                                <option v-for="FileList in FileLists" :value=FileList.id>{{FileList.str_file_name}}</option>
-                               
+                                <option v-for="FileList in FileLists" :value="{id:FileList.id,text:FileList.str_file_name}">{{FileList.str_file_name}}</option>
+
                             </select>
-                            
+
                         </div>
                     </div>
-                    
-                  
+
+
                 </div>
             </div>
             <br/>
-        
+
             <div class="row">
-                  
+
             </div>
-         
+
             <div class="form-group">
                 <div class="row">
-                   
-                    <div class="col-md-12">  
+
+                    <div class="col-md-12">
                         <div class="list-group">
                               <button class="btn btn-primary" @click="uploadFile">Save</button>
-                        
+
                         </div>
                     </div>
-                    
-                  
+
+
                 </div>
             </div>
             <br/>
         </div>
         <hr/>
-    
+
     </div>
-   
+
 </template>
 
 <script>
- 
+
 
     export default {
         data(){
@@ -129,7 +129,8 @@
               attachments:[],
               form: new FormData,
               FileLists: "",
-              AssesFile: ""
+              AssesFile: "",
+              AssessmentObject:[]
           }
         },
         props: ['products'],
@@ -145,7 +146,7 @@
                 for(let i=0;i<selectedFiles.length;i++){
                     this.attachments.push(selectedFiles[i]);
                 }
-    
+
               //  console.log(this.AssesName);
             },
             uploadFile(){
@@ -153,8 +154,8 @@
                     this.form.append('pics[]',this.attachments[i]);
                 }
                 this.form.append('AssesName',this.AssesName);
-                this.form.append('AssesSemseter',this.AssesSemseter);
-                this.form.append('AssesOutcome',this.AssesOutcome);
+                this.form.append('AssesSemseter',this.AssesSemseter.id);
+                this.form.append('AssesOutcome',this.AssesOutcome.id);
                 const config = { headers: { 'Content-Type': 'multipart/form-data' } };
                 document.getElementById('upload-file').value=[];
                 axios.post('/upload',this.form,config).then(response=>{
@@ -169,11 +170,11 @@
                     });
             },
             getAllFiles(){
-                this.$emit('change', this.AssesOutcome)
+                this.$emit('change', this.AssesOutcome.id)
                 axios.get('/files', {
                         params: {
-                         AssesSemseter: this.AssesSemseter,
-                         AssesOutcome: this.AssesOutcome
+                         AssesSemseter: this.AssesSemseter.id,
+                         AssesOutcome: this.AssesOutcome.id
                         }
                     })
                 .then((response) => {
@@ -183,25 +184,33 @@
                 .catch((error) => {
                     console.log(error);
                 });
-               
+
             },
             downlodFile(){
-              
+
             axios.get('/downloads',{
                         params: {
-                         fileparam: this.AssesFile,
-                         
+                         fileparam: this.AssesFile.id,
+
                         }
                     }).then(res=>{
                          window.open("/storage/"+res.data);
                 });
-               
-               
+
+
+            },
+            sendProps(){
+                this.AssessmentObject.splice(0);
+                this.AssessmentObject.push(this.AssesName);
+                this.AssessmentObject.push(this.AssesSemseter);
+                this.AssessmentObject.push(this.AssesOutcome);
+                this.AssessmentObject.push(this.AssesFile);
+                this.$emit('AssessmentObject', this.AssessmentObject);
             }
         },
         mounted() {
             console.log('Component mounted.')
         }
-        
+
     }
 </script>
