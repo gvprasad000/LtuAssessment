@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label>Name</label>
-                        <input type="text" v-model="AssesName" class="form-control" placeholder="Please enter your name"/>
+                        <input type="text" @blur="sendProps" v-model="AssesName" class="form-control" placeholder="Please enter your name"/>
                     </div>
 
                     <div class="col-md-6">

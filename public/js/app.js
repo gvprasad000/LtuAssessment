@@ -2573,12 +2573,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       AssesOutcomevalue: "",
       AssessmentDetails: [],
-      OralCommunicationData: []
+      OralCommunicationData: [],
+      errormsgoralcomm: ""
     };
   },
   methods: {
@@ -2586,24 +2595,38 @@ __webpack_require__.r(__webpack_exports__);
       this.AssesOutcomevalue = value;
     },
     getAssessmentDetails: function getAssessmentDetails(value) {
-      this.AssessmentDetails = value;
+      this.AssessmentDetails = value; //  console.log(value);
     },
     saveOralCommunication: function saveOralCommunication(value) {
-      this.OralCommunicationData = value;
-      var OralCommFormData = new FormData();
-      OralCommFormData.append('AssessData', JSON.stringify(this.AssessmentDetails));
-      OralCommFormData.append('OralData', this.OralCommunicationData);
-      var config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      console.log(this.AssessmentDetails);
+
+      if (this.AssessmentDetails[3] != undefined && this.AssessmentDetails[3] != "" && this.AssessmentDetails[0] != "") {
+        this.OralCommunicationData = value;
+        var OralCommFormData = new FormData();
+        OralCommFormData.append('AssessData', JSON.stringify(this.AssessmentDetails));
+        OralCommFormData.append('OralData', this.OralCommunicationData);
+        var config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        };
+        axios.post('/saveoralcommunication', OralCommFormData, config).then(function (response) {
+          //success
+          // console.log(response);
+          location.reload();
+        })["catch"](function (response) {//error
+        });
+      } else {
+        console.log("error");
+
+        if (this.AssessmentDetails[3] == undefined || this.AssessmentDetails[3] == "") {
+          $('#myAlert1').show('fade');
+          this.errormsgoralcomm = "with file field";
+        } else if (this.AssessmentDetails[0] == "") {
+          $('#myAlert1').show('fade');
+          this.errormsgoralcomm = "with name field";
         }
-      };
-      axios.post('/saveoralcommunication', OralCommFormData, config).then(function (response) {
-        //success
-        // console.log(response);
-        location.reload();
-      })["catch"](function (response) {//error
-      });
+      }
     }
   },
   mounted: function mounted() {
@@ -38382,6 +38405,7 @@ var render = function() {
               attrs: { type: "text", placeholder: "Please enter your name" },
               domProps: { value: _vm.AssesName },
               on: {
+                blur: _vm.sendProps,
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -39418,6 +39442,7 @@ var render = function() {
               attrs: { type: "text", placeholder: "Please enter your name" },
               domProps: { value: _vm.AssesName },
               on: {
+                blur: _vm.sendProps,
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -39895,6 +39920,35 @@ var render = function() {
             1
           )
         : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 offset-md-3" }, [
+        _c("div", { staticClass: "list-group" }, [
+          _c(
+            "div",
+            {
+              staticClass: "alert alert-danger collapse",
+              attrs: { id: "myAlert1" }
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "close",
+                  attrs: { id: "linkClose1", href: "#" }
+                },
+                [_vm._v("×")]
+              ),
+              _vm._v(" "),
+              _c("strong", [_vm._v("Error!")]),
+              _vm._v(
+                " There is a problem " +
+                  _vm._s(_vm.errormsgoralcomm) +
+                  "\n            "
+              )
+            ]
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("router-view")
     ],
