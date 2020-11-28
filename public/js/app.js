@@ -2027,6 +2027,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2037,7 +2042,8 @@ __webpack_require__.r(__webpack_exports__);
       form: new FormData(),
       FileLists: "",
       AssesFile: "",
-      AssessmentObject: []
+      AssessmentObject: [],
+      errormsg: ""
     };
   },
   props: ['products'],
@@ -2057,42 +2063,58 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     uploadFile: function uploadFile() {
-      for (var i = 0; i < this.attachments.length; i++) {
-        this.form.append('pics[]', this.attachments[i]);
-      }
-
-      this.form.append('AssesName', this.AssesName);
-      this.form.append('AssesSemseter', this.AssesSemseter.id);
-      this.form.append('AssesOutcome', this.AssesOutcome.id);
-      var config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      if (this.attachments.length != 0 && this.AssesSemseter != "" && this.AssesOutcome != "" && this.AssesName != "") {
+        for (var i = 0; i < this.attachments.length; i++) {
+          this.form.append('pics[]', this.attachments[i]);
         }
-      };
-      document.getElementById('upload-file').value = [];
-      axios.post('/upload', this.form, config).then(function (response) {
-        //success
-        console.log(response);
-        location.reload(); // console.log(...this.form);
-        //   console.log(this.attachments);
-      })["catch"](function (response) {//error
-      });
+
+        this.form.append('AssesName', this.AssesName);
+        this.form.append('AssesSemseter', this.AssesSemseter.id);
+        this.form.append('AssesOutcome', this.AssesOutcome.id);
+        var config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        };
+        document.getElementById('upload-file').value = [];
+        axios.post('/upload', this.form, config).then(function (response) {
+          //success
+          console.log(response);
+          location.reload(); // console.log(...this.form);
+          //   console.log(this.attachments);
+        })["catch"](function (response) {//error
+        });
+      } else {
+        if (this.AssesName == "") {
+          this.errormsg = "with your name field";
+        } else if (this.attachments.length == 0) {
+          this.errormsg = "with your File Upload field";
+        } else if (this.AssesSemseter == "") {
+          this.errormsg = "with your semester field";
+        } else if (this.AssesOutcome == "") {
+          this.errormsg = "with your outcome field";
+        }
+
+        $('#myAlert').show('fade');
+      }
     },
     getAllFiles: function getAllFiles() {
       var _this = this;
 
-      this.$emit('change', this.AssesOutcome.id);
-      axios.get('/files', {
-        params: {
-          AssesSemseter: this.AssesSemseter.id,
-          AssesOutcome: this.AssesOutcome.id
-        }
-      }).then(function (response) {
-        // console.log(response.data);
-        _this.FileLists = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      if (this.AssesSemseter != "" && this.AssesOutcome != "") {
+        this.$emit('change', this.AssesOutcome.id);
+        axios.get('/files', {
+          params: {
+            AssesSemseter: this.AssesSemseter.id,
+            AssesOutcome: this.AssesOutcome.id
+          }
+        }).then(function (response) {
+          // console.log(response.data);
+          _this.FileLists = response.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     },
     downlodFile: function downlodFile() {
       axios.get('/downloads', {
@@ -2113,6 +2135,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    $('#linkClose').click(function () {
+      $('#myAlert').hide('fade');
+    });
     console.log('Component mounted.');
   }
 });
@@ -2412,6 +2437,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2422,7 +2452,8 @@ __webpack_require__.r(__webpack_exports__);
       form: new FormData(),
       FileLists: "",
       AssesFile: "",
-      AssessmentObject: []
+      AssessmentObject: [],
+      errormsg: ""
     };
   },
   props: ['products'],
@@ -2442,42 +2473,58 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     uploadFile: function uploadFile() {
-      for (var i = 0; i < this.attachments.length; i++) {
-        this.form.append('pics[]', this.attachments[i]);
-      }
-
-      this.form.append('AssesName', this.AssesName);
-      this.form.append('AssesSemseter', this.AssesSemseter.id);
-      this.form.append('AssesOutcome', this.AssesOutcome.id);
-      var config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      if (this.attachments.length != 0 && this.AssesSemseter != "" && this.AssesOutcome != "" && this.AssesName != "") {
+        for (var i = 0; i < this.attachments.length; i++) {
+          this.form.append('pics[]', this.attachments[i]);
         }
-      };
-      document.getElementById('upload-file').value = [];
-      axios.post('/upload', this.form, config).then(function (response) {
-        //success
-        console.log(response);
-        location.reload(); // console.log(...this.form);
-        //   console.log(this.attachments);
-      })["catch"](function (response) {//error
-      });
+
+        this.form.append('AssesName', this.AssesName);
+        this.form.append('AssesSemseter', this.AssesSemseter.id);
+        this.form.append('AssesOutcome', this.AssesOutcome.id);
+        var config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        };
+        document.getElementById('upload-file').value = [];
+        axios.post('/upload', this.form, config).then(function (response) {
+          //success
+          console.log(response);
+          location.reload(); // console.log(...this.form);
+          //   console.log(this.attachments);
+        })["catch"](function (response) {//error
+        });
+      } else {
+        if (this.AssesName == "") {
+          this.errormsg = "with your name field";
+        } else if (this.attachments.length == 0) {
+          this.errormsg = "with your File Upload field";
+        } else if (this.AssesSemseter == "") {
+          this.errormsg = "with your semester field";
+        } else if (this.AssesOutcome == "") {
+          this.errormsg = "with your outcome field";
+        }
+
+        $('#myAlert').show('fade');
+      }
     },
     getAllFiles: function getAllFiles() {
       var _this = this;
 
-      this.$emit('change', this.AssesOutcome.id);
-      axios.get('/files', {
-        params: {
-          AssesSemseter: this.AssesSemseter.id,
-          AssesOutcome: this.AssesOutcome.id
-        }
-      }).then(function (response) {
-        // console.log(response.data);
-        _this.FileLists = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      if (this.AssesSemseter != "" && this.AssesOutcome != "") {
+        this.$emit('change', this.AssesOutcome.id);
+        axios.get('/files', {
+          params: {
+            AssesSemseter: this.AssesSemseter.id,
+            AssesOutcome: this.AssesOutcome.id
+          }
+        }).then(function (response) {
+          // console.log(response.data);
+          _this.FileLists = response.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     },
     downlodFile: function downlodFile() {
       axios.get('/downloads', {
@@ -2498,6 +2545,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    $('#linkClose').click(function () {
+      $('#myAlert').hide('fade');
+    });
     console.log('Component mounted.');
   }
 });
@@ -38358,19 +38408,22 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.AssesSemseter = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.AssesSemseter = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    _vm.getAllFiles
+                  ]
                 }
               },
               [
@@ -38679,8 +38732,6 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }),
-      _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-12" }, [
@@ -38692,6 +38743,35 @@ var render = function() {
                   on: { click: _vm.uploadFile }
                 },
                 [_vm._v("Save")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 offset-md-3" }, [
+            _c("div", { staticClass: "list-group" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "alert alert-danger collapse",
+                  attrs: { id: "myAlert" }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "close",
+                      attrs: { id: "linkClose", href: "#" }
+                    },
+                    [_vm._v("×")]
+                  ),
+                  _vm._v(" "),
+                  _c("strong", [_vm._v("Error!")]),
+                  _vm._v(
+                    " There is a problem " +
+                      _vm._s(_vm.errormsg) +
+                      "\n                            "
+                  )
+                ]
               )
             ])
           ])
@@ -39364,19 +39444,22 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.AssesSemseter = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.AssesSemseter = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    _vm.getAllFiles
+                  ]
                 }
               },
               [
@@ -39685,8 +39768,6 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }),
-      _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-12" }, [
@@ -39698,6 +39779,35 @@ var render = function() {
                   on: { click: _vm.uploadFile }
                 },
                 [_vm._v("Save")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 offset-md-3" }, [
+            _c("div", { staticClass: "list-group" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "alert alert-danger collapse",
+                  attrs: { id: "myAlert" }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "close",
+                      attrs: { id: "linkClose", href: "#" }
+                    },
+                    [_vm._v("×")]
+                  ),
+                  _vm._v(" "),
+                  _c("strong", [_vm._v("Error!")]),
+                  _vm._v(
+                    " There is a problem " +
+                      _vm._s(_vm.errormsg) +
+                      "\n                            "
+                  )
+                ]
               )
             ])
           ])

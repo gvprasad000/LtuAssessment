@@ -24,7 +24,7 @@
 
                     <div class="col-md-6">
                         <label>Semester & Year</label>
-                        <select v-model="AssesSemseter" class="form-control">
+                        <select v-model="AssesSemseter" @change="getAllFiles" class="form-control">
                             <option value="">Please select the semester and year for assessment</option>
                             <option :value="{id:'1',text:'Fall 2020'}">Fall 2020</option>
                             <option :value="{id:'2',text:'Spring 2021'}">Spring 2021</option>
@@ -92,9 +92,7 @@
             </div>
             <br/>
 
-            <div class="row">
 
-            </div>
 
             <div class="form-group">
                 <div class="row">
@@ -106,7 +104,14 @@
                         </div>
                     </div>
 
-
+                    <div class="col-md-6 offset-md-3">
+                        <div class="list-group">
+                            <div id="myAlert" class="alert alert-danger collapse">
+                                <a id="linkClose" href="#" class="close">&times;</a>
+                                <strong>Error!</strong> There is a problem {{errormsg}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <br/>
@@ -130,7 +135,8 @@
               form: new FormData,
               FileLists: "",
               AssesFile: "",
-              AssessmentObject:[]
+              AssessmentObject:[],
+              errormsg: ""
           }
         },
         props: ['products'],
@@ -150,41 +156,57 @@
               //  console.log(this.AssesName);
             },
             uploadFile(){
-                for(let i=0; i<this.attachments.length;i++){
-                    this.form.append('pics[]',this.attachments[i]);
+                if(this.attachments.length!=0 && this.AssesSemseter!="" && this.AssesOutcome!="" && this.AssesName!="") {
+                    for (let i = 0; i < this.attachments.length; i++) {
+                        this.form.append('pics[]', this.attachments[i]);
+                    }
+                    this.form.append('AssesName', this.AssesName);
+                    this.form.append('AssesSemseter', this.AssesSemseter.id);
+                    this.form.append('AssesOutcome', this.AssesOutcome.id);
+                    const config = {headers: {'Content-Type': 'multipart/form-data'}};
+                    document.getElementById('upload-file').value = [];
+                    axios.post('/upload', this.form, config).then(response => {
+                        //success
+                        console.log(response);
+                        location.reload();
+                        // console.log(...this.form);
+                        //   console.log(this.attachments);
+                    })
+                        .catch(response => {
+                            //error
+                        });
+                }else{
+                    if(this.AssesName==""){
+                        this.errormsg="with your name field"
+                    }else if(this.attachments.length==0){
+                        this.errormsg="with your File Upload field"
+                    }else if(this.AssesSemseter==""){
+                        this.errormsg="with your semester field"
+                    }else if(this.AssesOutcome==""){
+                        this.errormsg="with your outcome field"
+                    }
+                        $('#myAlert').show('fade');
+
                 }
-                this.form.append('AssesName',this.AssesName);
-                this.form.append('AssesSemseter',this.AssesSemseter.id);
-                this.form.append('AssesOutcome',this.AssesOutcome.id);
-                const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-                document.getElementById('upload-file').value=[];
-                axios.post('/upload',this.form,config).then(response=>{
-                    //success
-                    console.log(response);
-                   location.reload();
-                    // console.log(...this.form);
-                 //   console.log(this.attachments);
-                })
-                    .catch(response=>{
-                        //error
-                    });
             },
             getAllFiles(){
-                this.$emit('change', this.AssesOutcome.id)
-                axios.get('/files', {
+
+                if(this.AssesSemseter!="" && this.AssesOutcome!="") {
+                    this.$emit('change', this.AssesOutcome.id)
+                    axios.get('/files', {
                         params: {
-                         AssesSemseter: this.AssesSemseter.id,
-                         AssesOutcome: this.AssesOutcome.id
+                            AssesSemseter: this.AssesSemseter.id,
+                            AssesOutcome: this.AssesOutcome.id
                         }
                     })
-                .then((response) => {
-                   // console.log(response.data);
-                    this.FileLists = response.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-
+                        .then((response) => {
+                            // console.log(response.data);
+                            this.FileLists = response.data;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
             },
             downlodFile(){
 
@@ -209,6 +231,9 @@
             }
         },
         mounted() {
+            $('#linkClose').click(function () {
+                $('#myAlert').hide('fade');
+            });
             console.log('Component mounted.')
         }
 
