@@ -11,10 +11,10 @@ class Assessment extends Model
 {
     public function uploadRequest($request)
     {
-       
-       
+
+
         $uploadedFiles=$request->pics;
-    
+
         foreach ($uploadedFiles as $file){
             $assessment= new Assessment();
             $filename=$file->store('LTUDocs');
@@ -24,7 +24,7 @@ class Assessment extends Model
             $assessment->str_file_key=$filename;
             $assessment->str_file_name=$file->getClientOriginalName();;
             $assessment->save();
-         
+
         }
         return $assessment;
     }
@@ -34,9 +34,11 @@ class Assessment extends Model
                             ->where('int_outcome_info','=', $request->AssesOutcome)
                             ->get();
     }
-    
+
     public function downloadFile($request){
-       $filedata=Assessment::select('str_file_key','str_file_name')->where('id', $request->fileparam)->get();
+       $filedata=Assessment::select('str_file_key','str_file_name')
+                           ->where('id', $request->fileparam)
+                           ->get();
        $path=$filedata[0]['str_file_key'];
          return $path;
     }
